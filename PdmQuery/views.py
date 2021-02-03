@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from django.shortcuts import HttpResponse
 
-# Create your views here.
+
+def Search_home(request):
+    return render(request, 'PdmSearchPage/page1.html')
