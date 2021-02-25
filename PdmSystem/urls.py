@@ -19,5 +19,5 @@ from PdmQuery import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pdmsearch', views.Search_home)
+    path('pdmsearch', views.Search_home),
 ]
