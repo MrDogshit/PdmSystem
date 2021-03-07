@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import pymysql
+from django.utils.translation import gettext_lazy as _
+LANGUAGES = [('zh-Hans', _('Simplified Chinese'))]
+
 # pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -86,7 +89,7 @@ WSGI_APPLICATION = 'PdmSystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
+        'NAME': 'mydjangodb',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
