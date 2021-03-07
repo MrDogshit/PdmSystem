@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class ICohm(models.Model):
     PartNumber = models.BigIntegerField()
     Description = models.CharField(max_length=40)
