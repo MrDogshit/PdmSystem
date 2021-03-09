@@ -150,61 +150,22 @@
             <th>PACK_TYP</th>
             <th>Voltage Rating</th>
             <th>Height</th>
+            <th>Detail</th>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        {% for i in ohm_data %}
+            <tr>
+                <td>{{ i.PartNumber }}</td>
+                <td>{{ i.Description }}</td>
+                <td>{{ i.OhmValue }}</td>
+                <td>{{ i.Tolerance }}</td>
+                <td>{{ i.PackType }}</td>
+                <td>{{ i.VoltageRating }}</td>
+                <td>{{ i.Height_mm }}</td>
+                <td>
+                    <a href="#">详情</a>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
 </body>
 </html>
