@@ -5,8 +5,9 @@ from .models import ICohm
 
 @csrf_protect
 def SearchHome(request):
+    data = request.POST.get('')
     ohm_data = ICohm.objects.filter(OhmValue__range=[200, 1100]).filter(OhmValue__range=[500, 1100])
-    return render(request, 'PdmSearchPage/SearchHompage.html', {'ohm_data': ohm_data})
+    return render(request, 'PdmSearchPage/SearchHompage.html', {'ohm_data': ohm_data, 'data': data})
 
 
 def ShowDetail(request):
