@@ -4,7 +4,7 @@ from django.db import models
 
 
 class ICohm(models.Model):
-    PartNumber = models.BigIntegerField()
+    PartNumber = models.CharField(max_length=20)
     Description = models.CharField(max_length=40)
     OhmValue = models.PositiveIntegerField()
     Tolerance = models.FloatField()

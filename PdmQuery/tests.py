@@ -4,8 +4,6 @@ from django.test import TestCase
 
 
 
-b = {'test': 'dsdet', 'bds':'setqt'}
-for i, k in b.items():
-    print(b[i])
+
 
 
