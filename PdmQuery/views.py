@@ -16,6 +16,7 @@ def SearchDataProcess(get_data, is_max=False):
         get_data = 0
     return get_data
 
+
 def SearchHome(request):
     search_type = request.POST.get('search_type')
     search_context = request.POST.get('search_context')
@@ -42,6 +43,9 @@ def SearchHome(request):
         ohm_data = ohm_data.filter(Description__contains=search_context)
     else:
         ohm_data = ohm_data.filter(PartNumber__contains=search_context)
+
+    if isinstance(pack_type, str) and len(pack_type) > 0:
+        ohm_data = ohm_data.filter(PackType=pack_type)
 
     return render(request, 'PdmSearchPage/SearchHompage.html', {'ohm_data': ohm_data, 'search_data': search_data})
 
