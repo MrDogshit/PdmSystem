@@ -6,6 +6,7 @@ from .models import ICohm
 DATA_MAX = 9999999
 EMPTY_SEARCH = [['Part Number', '', 'Ture', 0, 9999999, 0, 9999999, '', 0, 9999999, 0, 9999999, ''], [None, None, None, 0, 9999999, 0, 9999999, None, 0, 9999999, 0, 9999999, None]]
 
+
 def SearchDataProcess(get_data, is_max=False):
     if get_data != '' and get_data is not None:
         get_data = int(get_data)
@@ -31,14 +32,16 @@ def SearchHome(request):
     pack_type =request.POST.get('pack_type')
 
     search_data = [search_type, search_context, search_kind, voltage_min, voltage_max, height_min, height_max, producter, value_min, value_max, tol_min, tol_max, pack_type]
+    ohm_data = ICohm.objects.filter(VoltageRating__gte=voltage_min, VoltageRating__lte=voltage_max,
+                                    Height_mm__gte=height_min, Height_mm__lte=height_max, OhmValue__gte=value_min,
+                                    OhmValue__lte=value_max, Tolerance__gte=tol_min, Tolerance__lte=tol_max)
+
     if search_data in EMPTY_SEARCH:
         ohm_data = None
     elif search_type == 'Description':
-        ohm_data = ICohm.objects.filter(Description__contains=search_context, VoltageRating__gte=voltage_min, VoltageRating__lte=voltage_max, Height_mm__gte=height_min, Height_mm__lte=height_max,
-                                        OhmValue__gte=value_min, OhmValue__lte=value_max, Tolerance__gte=tol_min, Tolerance__lte=tol_max)
+        ohm_data = ohm_data.filter(Description__contains=search_context)
     else:
-        ohm_data = ICohm.objects.filter(PartNumber__contains=search_context)
-
+        ohm_data = ohm_data.filter(PartNumber__contains=search_context)
 
     return render(request, 'PdmSearchPage/SearchHompage.html', {'ohm_data': ohm_data, 'search_data': search_data})
 
