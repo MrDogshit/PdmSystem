@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
-from django.views.decorators.csrf import csrf_exempt,csrf_protect
+# from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from .models import ICohm
 
 DATA_MAX = 9999999
@@ -30,7 +30,7 @@ def SearchHome(request):
     value_max = SearchDataProcess(request.POST.get('value_max'), True)
     tol_min = SearchDataProcess(request.POST.get('tol_min'))
     tol_max = SearchDataProcess(request.POST.get('tol_max'), True)
-    pack_type =request.POST.get('pack_type')
+    pack_type = request.POST.get('pack_type')
 
     search_data = [search_type, search_context, search_kind, voltage_min, voltage_max, height_min, height_max, producter, value_min, value_max, tol_min, tol_max, pack_type]
     ohm_data = ICohm.objects.filter(VoltageRating__gte=voltage_min, VoltageRating__lte=voltage_max,
