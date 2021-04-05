@@ -6,6 +6,7 @@ from .models import ICohm
 DATA_MAX = 9999999
 EMPTY_SEARCH = [['Part Number', '', 'Ture', 0, 9999999, 0, 9999999, '', 0, 9999999, 0, 9999999, ''], [None, None, None, 0, 9999999, 0, 9999999, None, 0, 9999999, 0, 9999999, None]]
 
+
 def SearchDataProcess(get_data, is_max=False):
     if get_data != '' and get_data is not None:
         get_data = int(get_data)
@@ -14,6 +15,7 @@ def SearchDataProcess(get_data, is_max=False):
     else:
         get_data = 0
     return get_data
+
 
 def SearchHome(request):
     search_type = request.POST.get('search_type')
@@ -38,7 +40,6 @@ def SearchHome(request):
                                         OhmValue__gte=value_min, OhmValue__lte=value_max, Tolerance__gte=tol_min, Tolerance__lte=tol_max)
     else:
         ohm_data = ICohm.objects.filter(PartNumber__contains=search_context)
-
 
     return render(request, 'PdmSearchPage/SearchHompage.html', {'ohm_data': ohm_data, 'search_data': search_data})
 
