@@ -30,16 +30,22 @@ def SearchHome(request):
     value_max = SearchDataProcess(request.POST.get('value_max'), True)
     tol_min = SearchDataProcess(request.POST.get('tol_min'))
     tol_max = SearchDataProcess(request.POST.get('tol_max'), True)
-    pack_type =request.POST.get('pack_type')
+    pack_type = request.POST.get('pack_type')
 
     search_data = [search_type, search_context, search_kind, voltage_min, voltage_max, height_min, height_max, producter, value_min, value_max, tol_min, tol_max, pack_type]
+    ohm_data = ICohm.objects.filter(VoltageRating__gte=voltage_min, VoltageRating__lte=voltage_max,
+                                    Height_mm__gte=height_min, Height_mm__lte=height_max, OhmValue__gte=value_min,
+                                    OhmValue__lte=value_max, Tolerance__gte=tol_min, Tolerance__lte=tol_max)
+
     if search_data in EMPTY_SEARCH:
         ohm_data = None
     elif search_type == 'Description':
-        ohm_data = ICohm.objects.filter(Description__contains=search_context, VoltageRating__gte=voltage_min, VoltageRating__lte=voltage_max, Height_mm__gte=height_min, Height_mm__lte=height_max,
-                                        OhmValue__gte=value_min, OhmValue__lte=value_max, Tolerance__gte=tol_min, Tolerance__lte=tol_max)
+        ohm_data = ohm_data.filter(Description__contains=search_context)
     else:
-        ohm_data = ICohm.objects.filter(PartNumber__contains=search_context)
+        ohm_data = ohm_data.filter(PartNumber__contains=search_context)
+
+    if isinstance(pack_type, str) and len(pack_type) > 0:
+        ohm_data = ohm_data.filter(PackType=pack_type)
 
     return render(request, 'PdmSearchPage/SearchHompage.html', {'ohm_data': ohm_data, 'search_data': search_data})
 
