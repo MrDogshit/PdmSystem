@@ -4,12 +4,18 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from .models import ICohm
 
 DATA_MAX = 9999999
-EMPTY_SEARCH = [['Part Number', '', 'Ture', 0, 9999999, 0, 9999999, '', 0, 9999999, 0, 9999999, ''], [None, None, None, 0, 9999999, 0, 9999999, None, 0, 9999999, 0, 9999999, None]]
+EMPTY_SEARCH = [
+    ['Part Number', '', 'Ture', 0, DATA_MAX, 0, DATA_MAX, '', 0, DATA_MAX, 0, DATA_MAX, ''],
+    [None, None, None, 0, DATA_MAX, 0, DATA_MAX, None, 0, DATA_MAX, 0, DATA_MAX, None]
+                ]
 
 
 def SearchDataProcess(get_data, is_max=False):
     if get_data != '' and get_data is not None:
-        get_data = int(get_data)
+        if '.' in get_data:
+            get_data = float(get_data)
+        else:
+            get_data = int(get_data)
     elif is_max is True:
         get_data = DATA_MAX
     else:
