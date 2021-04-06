@@ -94,7 +94,7 @@
             <input class="search_context" type="text" name="search_context" style="width: 280px;height: 22px;" >
             <input type="submit" style="width: 100px;height: 30px;" value="搜索" >
 	    </div>
-        <p>{{ search_data }}</p>
+{#        <p>{{ search_data }}</p>#}
 
         <div id="optionblock">
             <div class="leftblock">
@@ -134,8 +134,8 @@
                     <input type="number" name="value_max">
                 </p>
                 <p class="option"><span>Tolerance</span>
-                    <input type="number" name="tol_min">~
-                    <input type="number" name="tol_max">
+                    <input type="number" min="0" step="0.01" name="tol_min">~
+                    <input type="number" max="1" step="0.01" name="tol_max">
                 </p>
                 <p class="option"><span >PACK_TYP</span>
                     <input type="text" name="pack_type" style="width: 222px;">
@@ -152,8 +152,8 @@
             <th>Value</th>
             <th>Tolerance</th>
             <th>PACK_TYP</th>
-            <th>Voltage Rating</th>
-            <th>Height</th>
+            <th>Voltage Rating(V)</th>
+            <th>Height(mm)</th>
             <th>Detail</th>
         </tr>
         {% for i in ohm_data %}
