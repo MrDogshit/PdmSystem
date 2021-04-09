@@ -58,4 +58,5 @@ def SearchHome(request):
 
 def ShowDetail(request):
     # request.GET.get()
-    return HttpResponse('页面正在开发')
+    # return render(request, 'PdmSearchPage/DetailPage.html')
+    return HttpResponse('正在开发')
