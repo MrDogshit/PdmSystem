@@ -140,3 +140,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'CommonStaticFile').replace('\\', '/'),
 ]
+
+# global setting
+
+# 指定上传（读取）文件的相对路径
+MEDIA_URL = ''
+
+# 指定上传文件绝对路径
+MEDIA_ROOT = ''
